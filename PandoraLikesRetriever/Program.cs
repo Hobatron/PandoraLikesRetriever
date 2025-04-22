@@ -80,9 +80,10 @@ try
         
         var responseContent = await response.Content.ReadAsStringAsync();
         var feedbackResponse = JsonSerializer.Deserialize<PandoraFeedbackResponse>(responseContent, JsonContext.Default.PandoraFeedbackResponse);
+
+        if (feedbackResponse == null) break;
+        if (feedbackResponse.Feedback == null) break;
         
-        if (feedbackResponse?.Feedback == null) break;
-        feedbackResponse.
         allFeedback.AddRange(feedbackResponse.Feedback);
         total = feedbackResponse.Total;
         startIndex += pageSize;
